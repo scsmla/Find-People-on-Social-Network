@@ -7,6 +7,7 @@
 
 const fs = require('fs');
 const puppeteer = require('puppeteer');
+// const login_facebook = require ('./login_fb')
 
 //Defind the url to get data
 url = 'https://vi-vn.facebook.com/public/Thang+Vu'
@@ -25,8 +26,7 @@ function extractItems() {
     	JSON.stringify({'user_id': JSON.parse(user_info).id, 
     		'user_profile_photo_source':user_profile_photo_source
     	})
-    )
-    	
+    )	
   }
   return users;
 }
@@ -52,6 +52,7 @@ async function scrapeInfiniteScrollItems(
   return items;
 }
 
+
 (async () => {
   // Set up browser and page.
   const browser = await puppeteer.launch({
@@ -59,17 +60,30 @@ async function scrapeInfiniteScrollItems(
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
   const page = await browser.newPage();
-  page.setViewport({ width: 1280, height: 10000 });
+  page.setViewport({ width: 1280, height: 1000 });
 
   // Navigate to the demo page.
   await page.goto(url);
 
   // Scroll and extract items from the page.
-  const items = await scrapeInfiniteScrollItems(page, extractItems, 100);
+  const items = await scrapeInfiniteScrollItems(page, extractItems, 200);
 
   // Save extracted items to a file.
-  fs.writeFileSync('./users.txt', items.join('\n') + '\n');
+  fs.writeFileSync('./data/users.txt', items.join('\n') + '\n');
 
-  // Close the browser.
+  // login_facebook()
+  // .then(() => {
+  //   console.log('Log in successs');
+  // })
+  // .catch(() => {
+  //   console.log('Failure')
+  // })
+
+  // (async function () {
+  //     await login_facebook();
+      
+  // })()
+
   await browser.close();
 })();
+
