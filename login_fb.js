@@ -2,6 +2,13 @@ const puppeteer = require('puppeteer');
 const CRED = require('./credential');
 const fs = require('fs');
 
+// import '@tensorflow/tfjs-node';
+
+// implements nodejs wrappers for HTMLCanvasElement, HTMLImageElement, ImageData
+const canvas = require('canvas');
+
+const faceapi = require('face-api.js');
+
 const sleep = async (ms) => {
 return new Promise((res, rej) => {
 setTimeout(() => {
@@ -61,6 +68,31 @@ pass: '#pass'
 
     await page.waitForSelector('#fbTimelineHeadline');
     await page.click('#fbTimelineHeadline a[data-tab-key="photos"')
+
+    const MODEL_URL = '/models'
+
+	await faceapi.loadSsdMobilenetv1Model(MODEL_URL)
+	await faceapi.loadFaceLandmarkModel(MODEL_URL)
+	await faceapi.loadFaceRecognitionModel(MODEL_URL)
+
+	await page.waitForSelector('i');
+
+	await page.evaluate(() => {
+   		const images = document.querySelectorAll('i:not([background-image=""])');
+   		async (() => {
+	   		for(const image of images ){
+	   			await page.click(image)
+	   			// const resultImage = document.querySelector('img')
+	   			// let fullFaceDescriptions = await faceapi
+	   			// 	.detectAllFaces(input)
+	   			// 	.withFaceLandmarks()
+	   			// 	.withFaceDescriptors()
+
+
+	   		}
+   		})
+	});
+
 
  //    await page.evaluate(() => {
  //    	const timeLineHeadLine = document.querySelector('#fbTimelineHeadline');
