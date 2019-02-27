@@ -10,7 +10,7 @@ const puppeteer = require('puppeteer');
 // const login_facebook = require ('./login_fb')
 
 //Defind the url to get data
-url = 'https://vi-vn.facebook.com/public/Thang+Vu'
+const url = 'https://vi-vn.facebook.com/public/Thang+Vu'
 
 function extractItems() {
   //Defind the variable to capture user and their info	
