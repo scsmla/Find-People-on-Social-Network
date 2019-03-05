@@ -1,6 +1,15 @@
-# Find-People-on-Social-Network
+## Find-People-on-Social-Network
 
-First need npm, node installed
+#### Requirement
+First need npm, node installed `sudo apt install node`
+
+Install cmake(for face recognition) `sudo apt-get install cmake`
+
+Install libx11 for the dlib GUI `sudo apt-get install libx11-dev`
+
+Install libpng for reading images `sudo apt-get install libpng-dev`
+
+#### How to make it work
 
 Provide an image of wanted user in imgTest folder
 

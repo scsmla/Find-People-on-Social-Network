@@ -3,10 +3,15 @@ const CRED = require('./credential');
 const fs = require('fs');
 const canvas = require('canvas');
 const faceapi = require('face-api.js');
-
+const tf-node = require('@tensorflow/tfjs-node');
 
 const MODEL_URL = '/models'
-// import '@tensorflow/tfjs-node';
+
+const { Canvas, Image, ImageData } = canvas
+faceapi.env.monkeyPatch({ Canvas, Image, ImageData })
+
+// await faceapi.loadSsdMobilenetv1Model('/models')
+// console.log(faceapi.nets)
 
 const sleep = async (ms) => {
 	return new Promise((res, rej) => {
@@ -63,16 +68,15 @@ function extractImages() {
 	const extractedImages = document.querySelectorAll('div.tagWrapper');
 	const images = [];
 
+	// console.log('aaa')
 	for (let image of extractedImages) {
 		//Query information and profile photo of each found user
 		image_info = image.querySelector('i').getAttribute('style');
-		console.log(image_info +'aaaa')
-
 		images.push(
-			JSON.stringify({'image_src': JSON.parse(image_info)}
+			JSON.stringify({'image_src': image_info}
 		))	
 	}
-	
+	debugger;
 	return images;
 }
 
@@ -104,10 +108,13 @@ function extractImages() {
 	// await faceapi.loadFaceLandmarkModel(MODEL_URL)
 	// await faceapi.loadFaceRecognitionModel(MODEL_URL)
 
-	const items = await page.evaluate(extractImages)
+	items = await page.evaluate(extractImages)
 
-	console.log('aaa')
-	fs.writeFileSync('./data/images.txt', items.join('\n') + '\n');
+	await console.log(JSON.stringify(items))
+	fs.writeFileSync('./app-data/images.txt', items.join('\n') + '\n');
+
+
+
 
 	// await page.evaluate(() => {
 	//   		const images = document.querySelectorAll('i:not([background-image=""])');

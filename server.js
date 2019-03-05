@@ -1,13 +1,5 @@
-// var express = require('express');
-// var fs = require('fs');
-// var request = require('request');
-// var cheerio = require('cheerio');
-// var app     = express();
-// var puppeteer = require('puppeteer');
-
 const fs = require('fs');
 const puppeteer = require('puppeteer');
-// const login_facebook = require ('./login_fb')
 
 //Defind the url to get data
 const url = 'https://vi-vn.facebook.com/public/Thang+Vu'
@@ -69,20 +61,7 @@ async function scrapeInfiniteScrollItems(
   const items = await scrapeInfiniteScrollItems(page, extractItems, 200);
 
   // Save extracted items to a file.
-  fs.writeFileSync('./data/users.txt', items.join('\n') + '\n');
-
-  // login_facebook()
-  // .then(() => {
-  //   console.log('Log in successs');
-  // })
-  // .catch(() => {
-  //   console.log('Failure')
-  // })
-
-  // (async function () {
-  //     await login_facebook();
-      
-  // })()
+  fs.writeFileSync('./app-data/users.txt', items.join('\n') + '\n');
 
   await browser.close();
 })();

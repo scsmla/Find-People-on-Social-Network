@@ -3,14 +3,21 @@
   "version": "0.0.1",
   "description": "Scrape le web.",
   "main": "server.js",
-  "author": "Scotch",
+  "author": "Bui Duy",
   "dependencies": {
-    "@tensorflow/tfjs-node": "^0.3.0",
+    "@tensorflow/tfjs-node": "^0.3.1",
     "canvas": "^2.3.1",
     "cheerio": "latest",
     "express": "latest",
     "face-api.js": "^0.18.0",
     "puppeteer": "^1.12.2",
-    "request": "latest"
+    "request": "latest",
+    "ts-node": "^8.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.3.3333"
   }
 }
